@@ -1,0 +1,8 @@
+@import 'reset/reeeset.min.css';
+* {
+  font-family: 'raleway';
+  line-height: 25px;
+}
+.btn-group {
+  margin: 20px 0;
+}
