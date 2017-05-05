@@ -26,7 +26,7 @@
             <tr>
               <td>{{ $post->id }}</td>
               <td>{{ $post->title }}</td>
-              <td>{{ substr($post->body, 0, 50) }} {{ strlen($post->body) > 50 ? "..." : "" }}</td>
+              <td>{{ substr(strip_tags($post->body), 0, 50) }} {{ strlen(strip_tags($post->body)) > 50 ? "..." : "" }}</td>
               <td>{{ $post->created_at->diffForHumans() }}</td>
               <td>
                 <a class="btn btn-success btn-sm" href="{{ route('posts.edit', $post->id) }}">Edit</a>

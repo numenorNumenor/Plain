@@ -30,7 +30,7 @@
           <h2>{{ $post->title }} <small>| {{ $post->created_at->diffForHumans() }}</small></h2>
 
           <p>
-            {{ substr($post->body, 0, 150) }} {{ strlen($post->body) > 150 ? "..." : "" }}
+            {{ substr(strip_tags($post->body), 0, 150) }} {{ strlen(strip_tags($post->body)) > 150 ? "..." : "" }}
           </p>
 
           <div class="btn-group">

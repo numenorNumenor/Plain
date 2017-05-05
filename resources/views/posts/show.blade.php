@@ -9,7 +9,7 @@
 
         <h1>{{ $post->title }}</h1>
 
-        <p class="lead">{{ $post->body }}</p>
+        <p class="lead">{!! $post->body !!}</p>
 
         <div class="btn-group">
           <a class="btn btn-primary btn-sm" href="{{ route('posts.edit', $post->id) }}">Edit</a>

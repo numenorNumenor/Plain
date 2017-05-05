@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Comment;
 use Session;
+use Purifier;
 
 class PostsController extends Controller
 {
@@ -53,7 +54,7 @@ class PostsController extends Controller
         $post = new Post;
 
         $post->title = $request->title;
-        $post->body = $request->body;
+        $post->body = Purifier::clean($request->body);
 
         $post->save();
 
@@ -104,8 +105,8 @@ class PostsController extends Controller
 
       $post = Post::find($id);
 
-      $post->title = $request->input('title');
-      $post->body = $request->input('body');
+      $post->title = $request->title;
+      $post->body = Purifier::clean($request->body);
 
       $post->save();
 
