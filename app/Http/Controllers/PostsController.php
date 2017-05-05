@@ -71,10 +71,8 @@ class PostsController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        
-        $comments = Comment::orderBy('id', 'desc')->paginate(3);
 
-        return view('posts.show')->withPost($post)->withComments($comments);
+        return view('posts.show')->withPost($post);
     }
 
     /**
