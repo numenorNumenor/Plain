@@ -27,3 +27,7 @@ Route::resource('posts', 'PostsController');
 //Auth
 
 Auth::routes();
+
+// Comments
+
+Route::post('comments/{post_id}', ['uses' => 'CommentsController@store', 'as' => 'comments.store']);
