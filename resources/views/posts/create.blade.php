@@ -38,10 +38,14 @@
   <div class="col-md-8 col-md-offset-2">
       <h1>Create Post</h1>
 
-      {!! Form::open([ 'route' => 'posts.store']) !!}
+      {!! Form::open([ 'route' => 'posts.store', 'files' => true]) !!}
         <div class="form-group">
           {{ Form::label('title', 'Title :') }}
           {{ Form::text('title', null, array('class' => 'form-control')) }}
+        </div>
+        <div class="form-group">
+          {{ Form::label('featured_img', 'Img:') }}
+          {{ Form::file('featured_img', null, array('class' => 'form-control')) }}
         </div>
         <div class="form-group">
           {{ Form::label('body', 'Post :') }}

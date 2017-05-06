@@ -7,6 +7,8 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
 
+        <img src="{{ asset('img/' . $post->image) }}" alt="">
+
         <h1>{{ $post->title }}</h1>
 
         <p class="lead">{!! $post->body !!}</p>

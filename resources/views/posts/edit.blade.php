@@ -38,10 +38,14 @@
     <div class="col-md-8 col-md-offset-2">
       <h1>Edit Post</h1>
 
-      {!! Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PUT']) !!}
+      {!! Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PUT', 'files' => true]) !!}
         <div class="form-group">
           {{ Form::label('title', 'Title :') }}
           {{ Form::text('title', null, array('class' => 'form-control')) }}
+        </div>
+        <div class="form-group">
+          {{ Form::label('featured_img', 'Update Img :') }}
+          {{ Form::file('featured_img', null, array('class' => 'form-control')) }}
         </div>
         <div class="form-group">
           {{ Form::label('body', 'Post :') }}

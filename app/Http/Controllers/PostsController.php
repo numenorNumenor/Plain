@@ -7,6 +7,8 @@ use App\Post;
 use App\Comment;
 use Session;
 use Purifier;
+use Image;
+use Storage;
 
 class PostsController extends Controller
 {
@@ -48,13 +50,23 @@ class PostsController extends Controller
     {
         $this->validate($request, [
           'title' => 'required|max:255',
-          'body'  => 'required'
+          'body'  => 'required',
+          'featured_img' => 'sometimes|image'
         ]);
 
         $post = new Post;
 
         $post->title = $request->title;
         $post->body = Purifier::clean($request->body);
+
+        if ($request->hasFile('featured_img')) {
+          $image = $request->file('featured_img');
+          $filename = time() . '.' . $image->getClientOriginalExtension();
+          $location = public_path('img/' . $filename);
+          Image::make($image)->resize(800, 400)->save($location);
+
+          $post->image = $filename;
+        }
 
         $post->save();
 
@@ -100,13 +112,27 @@ class PostsController extends Controller
     {
       $this->validate($request, [
         'title' => 'required|max:255',
-        'body'  => 'required'
+        'body'  => 'required',
+        'featured_img' => 'image'
       ]);
 
       $post = Post::find($id);
 
       $post->title = $request->title;
       $post->body = Purifier::clean($request->body);
+
+      if ($request->hasFile('featured_img')) {
+        $image = $request->file('featured_img');
+        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $location = public_path('img/' . $filename);
+        Image::make($image)->resize(800, 400)->save($location);
+        $oldFilename = $post->image;
+
+        $post->image = $filename;
+
+        Storage::delete($oldFilename);
+      }
+
 
       $post->save();
 
@@ -126,6 +152,8 @@ class PostsController extends Controller
         $post = Post::find($id);
 
         $post->delete();
+
+        Storage::delete($post->image);
 
         Session::flash('success', 'Post was successfully deleted !');
 
